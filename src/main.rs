@@ -29,6 +29,11 @@ fn main() {
     }
 }
 
+/// Sends email from the past to yourself 
+/// 
+/// * `file_name`: letter's full path 
+/// * `env_path`: project root path to find `.env` file
+/// * `curr_date`: day the letter originates from
 fn send_email(file_name: String, env_path: &str, curr_date: &str) {
     dotenv::from_path(format!("{env_path}/.env")).ok();
 
