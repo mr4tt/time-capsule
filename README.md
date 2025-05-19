@@ -1,16 +1,18 @@
 # Time Capsule
 
-This project lets you send an email to your future self. Currently only works with gmail.
+This project lets you send an email to your future self. Currently only works with **gmail**.
 
 ## Run
 
-- `cargo run`
+- `cargo build --release && mv target/release/time-capsule.exe .`
+- `./time-capsule.exe`
+- Ensure you have letters in a `letters/` folder
 
 ## Setup
 
-### .env
+### .env / letters
 
-- This file contains your email and password, which is used to email you when the time comes.
+- The `.env` file contains your email and Google app password, which is used to email you when the time comes.
 
 1. Make a copy of `.env.example` and rename to `.env`
 2. Fill in the address field with your email address
@@ -26,7 +28,8 @@ This project lets you send an email to your future self. Currently only works wi
 - Cron is a program that can schedule times for things (cron jobs) to run on a Unix system
 - In this case, we use cron to run our code once a day to see if any emails should be sent
 
-1. Go to your repo and run `cargo build --release` to create the executable
+1. Go to your repo and run `cargo build --release && mv target/release/time-capsule.exe .` to create the executable and move it to the project root directory
 2. Run `crontab -e` to create a new crontab file (contains all cron job info) or open it
-3. Append `5 0 * * * ./time-capsule/target/release/time-capsule.exe` (or current location of your executable)
+3. Append `5 0 * * * ./time-capsule/time-capsule.exe` (or current location of your executable) to the crontab file
+   - This runs `time-capsule.exe` every day at 12:05am
    - note: cron jobs run from your home directory
