@@ -4,9 +4,17 @@ This project lets you send an email to your future self. Currently only works wi
 
 ## Run
 
+- Ensure you have letters in a `letters/` folder
+
+Windows
 - `cargo build --release && mv target/release/time-capsule.exe .`
 - `./time-capsule.exe`
-- Ensure you have letters in a `letters/` folder
+
+Linux
+- `cargo build --release && mv target/release/time-capsule .`
+- `./time-capsule`
+  
+- note: ensure your desired timezone is set
 
 ## Setup
 
@@ -23,13 +31,14 @@ This project lets you send an email to your future self. Currently only works wi
     - For each email, make the file name the date you'd like to send it, in `%Y-%m-%d` format
     - ex: `2025-05-12.txt`
 
-### cronjob (untested so far)
+### cronjob
 
 - Cron is a program that can schedule times for things (cron jobs) to run on a Unix system
 - In this case, we use cron to run our code once a day to see if any emails should be sent
 
-1. Go to your repo and run `cargo build --release && mv target/release/time-capsule.exe .` to create the executable and move it to the project root directory
+1. Go to your repo and run `cargo build --release && mv target/release/time-capsule .` to create the executable and move it to the project root directory
 2. Run `crontab -e` to create a new crontab file (contains all cron job info) or open it
-3. Append `5 0 * * * ./time-capsule/time-capsule.exe` (or current location of your executable) to the crontab file
-   - This runs `time-capsule.exe` every day at 12:05am
+3. Append `5 0 * * * ./time-capsule/time-capsule` (or current location of your executable) to the crontab file
+   - This runs `time-capsule` every day at 12:05am
    - note: cron jobs run from your home directory
+   - If you want logs to be in syslog, use `5 0 * * * ./time-capsule/time-capsule 2>&1 | logger -t time-capsule`
